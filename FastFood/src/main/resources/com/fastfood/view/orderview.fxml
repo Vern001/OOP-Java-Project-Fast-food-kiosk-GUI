@@ -29,12 +29,12 @@
 
 
 
-            <Button text="All" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange"/>
-            <Button text="Burgers" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange"/>
-            <Button text="Drinks" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange"/>
-            <Button text="Combos" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange"/>
-            <Button text="Extras" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange"/>
-            <Button text="Dessert" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange"/>
+            <Button text="All" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange" styleClass="category-button"/>
+            <Button text="Burgers" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange" styleClass="category-button"/>
+            <Button text="Drinks" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange" styleClass="category-button"/>
+            <Button text="Combos" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange" styleClass="category-button"/>
+            <Button text="Extras" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange" styleClass="category-button"/>
+            <Button text="Dessert" prefWidth="130.0" style="-fx-font-size: 14px;" onAction="#handleCategoryChange" styleClass="category-button"/>
         </VBox>
     </left>
 

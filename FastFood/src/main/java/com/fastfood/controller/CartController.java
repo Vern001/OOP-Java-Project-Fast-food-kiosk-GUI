@@ -15,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import com.fastfood.service.OrderService;
 
 public class CartController {
 
@@ -94,8 +95,14 @@ public class CartController {
 
     @FXML
     private void handlePlaceOrder(ActionEvent event) throws IOException {
-        Parent receiptRoot=FXMLLoader.load(getClass().getResource("/com/fastfood/view/receiptview.fxml"));
-        Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(receiptRoot,800,600));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fastfood/view/paymentview.fxml"));
+        Parent paymentRoot = loader.load();
+        PaymentController paymentController = loader.getController();
+        double subtotal = OrderService.getInstance().calculateSubtotal();
+        double tax = subtotal * 0.08;
+        double grandTotalWithTax = subtotal + tax;
+        paymentController.setOrderTotal(grandTotalWithTax);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(paymentRoot, 800, 600));
     }
 }
