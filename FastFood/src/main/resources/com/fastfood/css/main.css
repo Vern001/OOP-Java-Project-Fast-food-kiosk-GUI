@@ -56,3 +56,22 @@
 .secondary-btn:hover {
     -fx-background-color:#D4D4D4;
 }
+.place-order-btn {
+    -fx-background-color:#FF3232;
+    -fx-text-fill:white;
+    -fx-font-weight:bold;
+    -fx-font-size:16px;
+    -fx-background-radius:8;
+    -fx-cursor:hand;
+}
+
+
+.place-order-btn:hover {
+    -fx-background-color:#D32F2F;
+}
+
+.place-order-btn:disabled {
+    -fx-background-color:#E0E0E0;
+    -fx-text-fill:#A0A0A0;
+    -fx-cursor:default;
+}

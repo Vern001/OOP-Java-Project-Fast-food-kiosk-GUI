@@ -27,6 +27,8 @@ public class CartController {
     private Label taxLabel;
     @FXML
     private Label totalLabel;
+    @FXML
+    private Button placeOrderButton;
 
     @FXML
     public void initialize() {
@@ -77,9 +79,15 @@ public class CartController {
     }
 
     private void refreshTotals() {
+        var cartItems=OrderService.getInstance().getCartItems();
+
+        boolean isCartEmpty=cartItems.isEmpty();
+        if (placeOrderButton!=null) {
+            placeOrderButton.setDisable(isCartEmpty);
+        }
         double subtotal=OrderService.getInstance().calculateSubtotal();
         double tax=subtotal*0.08;
-        double grandTotal=subtotal + tax;
+        double grandTotal=subtotal+tax;
 
         subtotalLabel.setText(String.format("Subtotal: $%.2f",subtotal));
         taxLabel.setText(String.format("Tax (8%%): $%.2f",tax));
@@ -95,14 +103,17 @@ public class CartController {
 
     @FXML
     private void handlePlaceOrder(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fastfood/view/paymentview.fxml"));
-        Parent paymentRoot = loader.load();
-        PaymentController paymentController = loader.getController();
-        double subtotal = OrderService.getInstance().calculateSubtotal();
-        double tax = subtotal * 0.08;
+        if (OrderService.getInstance().getCartItems().isEmpty()) {
+            return;
+        }
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/fastfood/view/paymentview.fxml"));
+        Parent paymentRoot=loader.load();
+        PaymentController paymentController=loader.getController();
+        double subtotal=OrderService.getInstance().calculateSubtotal();
+        double tax=subtotal * 0.08;
         double grandTotalWithTax = subtotal + tax;
         paymentController.setOrderTotal(grandTotalWithTax);
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(paymentRoot, 800, 600));
     }
 }
