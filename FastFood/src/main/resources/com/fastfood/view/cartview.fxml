@@ -13,7 +13,8 @@
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.fastfood.controller.CartController"
-            stylesheets="@../css/cart.css">
+            stylesheets="@../css/main.css">
+
 
     <top>
         <HBox alignment="CENTER" prefHeight="60.0" style="-fx-background-color: #ff3131;">
@@ -45,8 +46,8 @@
                     </VBox>
                 </HBox>
                 <HBox alignment="CENTER_RIGHT" spacing="15.0">
-                    <Button text="⬅ Back to Menu" onAction="#handleBackToMenu" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-weight: bold;"/>
-                    <Button text="Place Order" onAction="#handlePlaceOrder" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #ff3131; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                    <Button text="⬅ Back to Menu" onAction="#handleBackToMenu" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #757575; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius:8; -fx-cursor: hand"/>
+                    <Button fx:id="placeOrderButton" text="Place Order" onAction="#handlePlaceOrder" prefHeight="40.0" prefWidth="140.0" styleClass="place-order-btn"/>
                 </HBox>
             </children>
         </VBox>
