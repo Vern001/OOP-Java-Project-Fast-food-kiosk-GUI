@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="25.0" prefHeight="600.0" prefWidth="800.0"
+      style="-fx-background-color: #FFFFFF;"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.fastfood.controller.ReceiptController">
+
+    <padding>
+        <Insets top="40.0" right="40.0" bottom="40.0" left="40.0"/>
+    </padding>
+
+    <Label text="🎉 Order Placed Successfully!" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #4CAF50;"/>
+    <Label text="Thank you for dining with Fast Food Express!" style="-fx-font-size: 16px; -fx-text-fill: #757575;"/>
+    <VBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #F5F5F5; -fx-padding: 20; -fx-background-radius: 10; -fx-border-color: #E0E0E0; -fx-border-radius: 10;">
+        <Label text="YOUR ORDER NUMBER IS" style="-fx-font-size: 12px; -fx-text-fill: #9E9E9E; -fx-font-weight: bold;"/>
+        <Label fx:id="orderNumberLabel" text="#0000" style="-fx-font-size: 48px; -fx-font-weight: bold; -fx-text-fill: #212121;"/>
+    </VBox>
+
+
+    <Label text="Please look at the pickup counter monitor for your number." style="-fx-font-size: 14px; -fx-text-fill: #757575;"/>
+    <Button text="Start New Order 🔄" onAction="#handleRestart" prefHeight="45.0" prefWidth="200.0"
+            style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+
+</VBox>

@@ -1,0 +1,13 @@
+com\fastfood\model\DessertItem.class
+com\fastfood\controller\MainMenuController.class
+com\fastfood\controller\OrderController.class
+com\fastfood\model\MenuItem.class
+com\fastfood\model\ComboItem.class
+com\fastfood\controller\CartController.class
+com\fastfood\model\CartItem.class
+com\fastfood\model\DrinkItem.class
+com\fastfood\util\PriceFormatter.class
+com\fastfood\controller\ReceiptController.class
+com\fastfood\Main.class
+com\fastfood\service\OrderService.class
+com\fastfood\model\FoodItem.class
