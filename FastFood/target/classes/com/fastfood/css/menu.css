@@ -40,19 +40,19 @@
 }
 
 .add-to-cart-btn {
-    -fx-background-color: #126aa6;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-    -fx-background-radius: 6;
-    -fx-padding: 8 16 8 16;
-    -fx-cursor: hand;
+    -fx-background-color:#126aa6;
+    -fx-text-fill:white;
+    -fx-font-weight:bold;
+    -fx-font-size:14px;
+    -fx-background-radius:6;
+    -fx-padding:8 16 8 16;
+    -fx-cursor:hand;
 }
 
 .add-to-cart-btn:hover {
-    -fx-background-color: #167bb1;
-    -fx-scale-x: 1.04;
-    -fx-scale-y: 1.04;
+    -fx-background-color:#167bb1;
+    -fx-scale-x:1.04;
+    -fx-scale-y:1.04;
 }
 
 .add-to-cart-btn:pressed {
