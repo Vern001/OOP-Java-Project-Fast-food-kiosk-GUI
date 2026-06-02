@@ -6,7 +6,7 @@ import java.util.List;
 
 public class OrderService {
     private static OrderService instance;
-    private List<CartItem> cartItems=new ArrayList<>();
+    private final List<CartItem> cartItems=new ArrayList<>();
     private OrderService() {
 
     }

@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class Main extends Application {
@@ -18,7 +19,7 @@ public class Main extends Application {
             Parent root=loader.load();
             Scene scene=new Scene(root, 800, 600);
             primaryStage.setTitle("Fast Food Ordering System");
-            Image appIcon = new Image(getClass().getResourceAsStream("/com/fastfood/images/logo.png"));
+            Image appIcon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/fastfood/images/logo.png")));
             primaryStage.getIcons().add(appIcon);
             primaryStage.setScene(scene);
             primaryStage.show();

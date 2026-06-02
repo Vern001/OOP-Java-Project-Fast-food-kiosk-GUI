@@ -1,7 +1,7 @@
 package com.fastfood.model;
 
 public class CartItem {
-    private MenuItem menuItem;
+    private final MenuItem menuItem;
     private int quantity;
 
     public CartItem(MenuItem menuItem, int quantity) {
@@ -25,6 +25,11 @@ public class CartItem {
     public void incrementQuantity() {
 
         this.quantity++;
+    }
+    public void decrementQuantity(){
+        if(this.quantity>1){
+            this.quantity--;
+        }
     }
 
     public double getTotalPrice() {

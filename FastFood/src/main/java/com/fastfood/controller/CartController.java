@@ -15,7 +15,7 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import java.io.IOException;
-import com.fastfood.service.OrderService;
+import java.util.Objects;
 
 public class CartController {
 
@@ -40,28 +40,59 @@ public class CartController {
         cartItemsContainer.getChildren().clear();
 
         for (CartItem item : OrderService.getInstance().getCartItems()) {
-            HBox row=new HBox();
+            HBox row = new HBox();
             row.setAlignment(Pos.CENTER_LEFT);
             row.setPadding(new Insets(15, 25, 15, 25));
             row.setStyle("-fx-background-color: #FFFFFF; -fx-border-color: #E0E0E0; -fx-border-width: 0 0 1 0;");
 
-            Label details=new Label(item.getMenuItem().getName() + "   (x" + item.getQuantity() + ")");
+            Label details = new Label(item.getMenuItem().getName());
             details.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #333333;");
 
-            Label price=new Label(String.format("$%.2f", item.getTotalPrice()));
+            //buttons to add and minus
+            HBox quantityControl = new HBox(10);
+            quantityControl.setAlignment(Pos.CENTER);
+            quantityControl.setPadding(new Insets(0, 20, 0, 20));
+
+            Button minus = new Button("-");
+            Label Qlabel = new Label(String.valueOf(item.getQuantity()));
+            Qlabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
+            Button plus = new Button("+");
+
+            String btnStyle = "-fx-background-color: #F5F5F5; -fx-text-fill: #333333; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 5; -fx-min-width: 30px; -fx-cursor: hand;";
+            minus.setStyle(btnStyle);
+            plus.setStyle(btnStyle);
+
+            minus.setOnAction(actionEvent -> {
+                if (item.getQuantity() > 1) {
+                    item.decrementQuantity();
+                } else {
+                    OrderService.getInstance().removeItem(item.getMenuItem());
+                }
+                populateCart();
+                refreshTotals();
+            });
+            plus.setOnAction(actionEvent -> {
+                item.incrementQuantity();
+                populateCart();
+                refreshTotals();
+            });
+            //end of buttons
+            quantityControl.getChildren().addAll(minus, Qlabel, plus);
+
+            Label price = new Label(String.format("$%.2f", item.getTotalPrice()));
             price.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #126aa6; -fx-padding: 0 0 0 20;");
 
-            javafx.scene.layout.Region spacer=new javafx.scene.layout.Region();
+            javafx.scene.layout.Region spacer = new javafx.scene.layout.Region();
             javafx.scene.layout.HBox.setHgrow(spacer, javafx.scene.layout.Priority.ALWAYS);
 
-            Button deleteBtn=new Button("X");
+            Button delete = new Button("X");
 
-            deleteBtn.setOnAction(e -> {
+            delete.setOnAction(e -> {
                 OrderService.getInstance().removeItem(item.getMenuItem());
                 populateCart();
                 refreshTotals();
             });
-            deleteBtn.setStyle(
+            delete.setStyle(
                     "-fx-background-color: #FFEBEE; " +
                             "-fx-text-fill: #D32F2F; " +
                             "-fx-font-weight: bold; " +
@@ -70,34 +101,32 @@ public class CartController {
                             "-fx-min-width: 40px; " +
                             "-fx-min-height: 40px; " +
                             "-fx-cursor: hand;"
-
             );
 
-            row.getChildren().addAll(details, price, spacer, deleteBtn);
+            row.getChildren().addAll(details, quantityControl, price, spacer, delete);
             cartItemsContainer.getChildren().add(row);
         }
     }
 
     private void refreshTotals() {
-        var cartItems=OrderService.getInstance().getCartItems();
-
-        boolean isCartEmpty=cartItems.isEmpty();
-        if (placeOrderButton!=null) {
+        var cartItems = OrderService.getInstance().getCartItems();
+        boolean isCartEmpty = cartItems.isEmpty();
+        if (placeOrderButton != null) {
             placeOrderButton.setDisable(isCartEmpty);
         }
-        double subtotal=OrderService.getInstance().calculateSubtotal();
-        double tax=subtotal*0.08;
-        double grandTotal=subtotal+tax;
+        double subtotal = OrderService.getInstance().calculateSubtotal();
+        double tax = subtotal * 0.08;
+        double grandTotal = subtotal + tax;
 
-        subtotalLabel.setText(String.format("Subtotal: $%.2f",subtotal));
-        taxLabel.setText(String.format("Tax (8%%): $%.2f",tax));
-        totalLabel.setText(String.format("Grand Total: $%.2f",grandTotal));
+        subtotalLabel.setText(String.format("Subtotal: $%.2f", subtotal));
+        taxLabel.setText(String.format("Tax (8%%): $%.2f", tax));
+        totalLabel.setText(String.format("Grand Total: $%.2f", grandTotal));
     }
 
     @FXML
     private void handleBackToMenu(ActionEvent event) throws IOException {
-        Parent menuRoot=FXMLLoader.load(getClass().getResource("/com/fastfood/view/orderview.fxml"));
-        Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
+        Parent menuRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/fastfood/view/orderview.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(menuRoot, 800, 600));
     }
 
@@ -106,14 +135,14 @@ public class CartController {
         if (OrderService.getInstance().getCartItems().isEmpty()) {
             return;
         }
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/fastfood/view/paymentview.fxml"));
-        Parent paymentRoot=loader.load();
-        PaymentController paymentController=loader.getController();
-        double subtotal=OrderService.getInstance().calculateSubtotal();
-        double tax=subtotal * 0.08;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fastfood/view/paymentview.fxml"));
+        Parent paymentRoot = loader.load();
+        PaymentController paymentController = loader.getController();
+        double subtotal = OrderService.getInstance().calculateSubtotal();
+        double tax = subtotal * 0.08;
         double grandTotalWithTax = subtotal + tax;
         paymentController.setOrderTotal(grandTotalWithTax);
-        Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(paymentRoot, 800, 600));
     }
 }

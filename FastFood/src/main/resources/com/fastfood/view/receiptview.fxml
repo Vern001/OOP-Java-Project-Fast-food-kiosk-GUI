@@ -24,6 +24,6 @@
 
     <Label text="Please look at the pickup counter monitor for your number." style="-fx-font-size: 14px; -fx-text-fill: #757575;"/>
     <Button text="Start New Order 🔄" onAction="#handleRestart" prefHeight="45.0" prefWidth="200.0"
-            style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 5;"/>
+            style="-fx-background-color: #D32F2F; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-background-radius: 5; -fx-cursor:hand;"/>
 
 </VBox>
