@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Random;
 
 public class ReceiptController {
@@ -29,7 +30,7 @@ public class ReceiptController {
 
     @FXML
     private void handleRestart(ActionEvent event) throws IOException {
-        Parent mainRoot=FXMLLoader.load(getClass().getResource("/com/fastfood/view/mainview.fxml"));
+        Parent mainRoot=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/fastfood/view/mainview.fxml")));
         Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(mainRoot, 800, 600));
     }

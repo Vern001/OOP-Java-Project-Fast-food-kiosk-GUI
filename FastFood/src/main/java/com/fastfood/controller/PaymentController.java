@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class PaymentController {
 
@@ -44,7 +45,7 @@ public class PaymentController {
 
     @FXML
     private void handleBackToCart(ActionEvent event) throws IOException {
-        Parent cartRoot = FXMLLoader.load(getClass().getResource("/com/fastfood/view/cartview.fxml"));
+        Parent cartRoot = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/fastfood/view/cartview.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(cartRoot, 800, 600));
     }

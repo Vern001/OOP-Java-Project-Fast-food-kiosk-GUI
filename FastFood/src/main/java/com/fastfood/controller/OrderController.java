@@ -10,6 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.geometry.Insets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -25,47 +27,56 @@ public class OrderController {
     private Label subtotalLabel;
     @FXML
     private void handleGoToCart(javafx.event.ActionEvent event) throws java.io.IOException {
-        Parent cartRoot=FXMLLoader.load(getClass().getResource("/com/fastfood/view/cartview.fxml"));
+        Parent cartRoot=FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/fastfood/view/cartview.fxml")));
         Stage stage=(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(cartRoot, 800, 600));
     }
 
-    private List<MenuItem> mastermenu=new ArrayList<>();
+    private final List<MenuItem> Mastermenu=new ArrayList<>();
 
     @FXML
     public void initialize() {
         FoodItem expressBurger=new FoodItem("Express Burger", 5.99, "Classic beef patty with sauce", false);
         FoodItem chickenBurger=new FoodItem("Chicken Burger", 5.99, "Classic chicken patty with ranch", false);
-        FoodItem cheeseBurger=new FoodItem("Cheese Burger", 6.49, "Classic burger with double patty and slice of american cheese", false);
+        FoodItem cheeseBurger=new FoodItem("Cheese Burger", 6.49, "Classic burger with double patty and slice of American cheese", false);
         FoodItem crispyBurger=new FoodItem("Crispy Chicken Burger", 6.49, "Deep fried crispy chicken with special sauces", false);
 
-        mastermenu.add(expressBurger);
-        mastermenu.add(cheeseBurger);
-        mastermenu.add(chickenBurger);
-        mastermenu.add(crispyBurger);
+        Mastermenu.add(expressBurger);
+        Mastermenu.add(cheeseBurger);
+        Mastermenu.add(chickenBurger);
+        Mastermenu.add(crispyBurger);
 
         DrinkItem fountainSoda=new DrinkItem("Fountain Soda", 1.99, "Ice cold carbonated drink", "Medium");
         DrinkItem orangeJuice = new DrinkItem("Orange Juice", 2.49, "100% freshly squeezed orange juice", "Medium");
         DrinkItem water= new DrinkItem("Water",0.99,"Natural Cold Water","Medium");
         DrinkItem milkshake= new DrinkItem("Milkshake",4.50,"Cold Chocolate milkshake","Medium");
-        mastermenu.add(fountainSoda);
-        mastermenu.add(orangeJuice);
-        mastermenu.add(water);
-        mastermenu.add(milkshake);
+        DrinkItem Pepsi=new DrinkItem("Pepsi",0.99,"Pepsi Can","Medium");
+        DrinkItem Sprite=new DrinkItem("Sprite",0.99,"sprite can","medium");
+        Mastermenu.add(Sprite);
+        Mastermenu.add(Pepsi);
+        Mastermenu.add(fountainSoda);
+        Mastermenu.add(orangeJuice);
+        Mastermenu.add(water);
+        Mastermenu.add(milkshake);
 
         FoodItem largeFries=new FoodItem("Large Fries", 3.49, "Golden crispy salted potato strips", false);
         FoodItem chickenNuggets=new FoodItem("10pc Chicken Nuggets", 5.49, "Crispy bite-sized white meat chicken", false);
-        mastermenu.add(largeFries);
-        mastermenu.add(chickenNuggets);
+        FoodItem chickenNuggets2=new FoodItem("20 pc Chicken Nuggets",9.99,"extra Crispy bite-sized white meat chicken",false);
+
+        Mastermenu.add(largeFries);
+        Mastermenu.add(chickenNuggets);
+        Mastermenu.add(chickenNuggets2);
 
         DessertItem iceCreamCone=new DessertItem("Ice Cream Cone", 0.99, "Cold simple ice cream on a cone","Vanilla");
-        mastermenu.add(iceCreamCone);
+        Mastermenu.add(iceCreamCone);
         DessertItem sundaeIceCream=new DessertItem("Sundae Ice Cream", 1.99, "Cold simple ice cream served in a cup","Chocolate");
-        mastermenu.add(sundaeIceCream);
+        Mastermenu.add(sundaeIceCream);
         DessertItem cheesecake=new DessertItem("Cheese Cake Slice", 2.10, "Cold Slice of cheesecake with strawberry on top","Strawberry");
-        mastermenu.add(cheesecake);
+        Mastermenu.add(cheesecake);
         DessertItem brownie=new DessertItem("Brownie", 1.50,"Warm brownie filled with chocolate","Chocolate");
-        mastermenu.add(brownie);
+        Mastermenu.add(brownie);
+        DessertItem tiramisu=new DessertItem("Tiramisu",2.99,"coffee flavored cake","coffee");
+        Mastermenu.add(tiramisu);
 
         MenuItem[] comboMealItems = { expressBurger, fountainSoda };
         ComboItem expressCombo = new ComboItem(
@@ -74,7 +85,7 @@ public class OrderController {
                 "Express Burger + Medium Fountain Soda",
                 comboMealItems
         );
-        mastermenu.add(expressCombo);
+        Mastermenu.add(expressCombo);
 
         MenuItem[] shareBoxItems = { cheeseBurger,cheeseBurger, largeFries,largeFries, fountainSoda, fountainSoda };
         ComboItem shareBox = new ComboItem(
@@ -83,7 +94,7 @@ public class OrderController {
                 "2 Burgers + 2Large Fries + 2 Medium Drinks",
                 shareBoxItems
         );
-        mastermenu.add(shareBox);
+        Mastermenu.add(shareBox);
 
         MenuItem[] familyMealItems = { expressBurger, cheeseBurger, chickenNuggets, largeFries, orangeJuice, fountainSoda };
         ComboItem familyMeal = new ComboItem(
@@ -92,7 +103,7 @@ public class OrderController {
                 "2 Express Burger + 4 Cheese Burger + 10pc Nuggets + 4Large Fries + 4 Drinks",
                 familyMealItems
         );
-        mastermenu.add(familyMeal);
+        Mastermenu.add(familyMeal);
 
         displayMenu("All");
     }
@@ -114,7 +125,7 @@ public class OrderController {
         int row=0;
 
 
-        for (MenuItem item:mastermenu) {
+        for (MenuItem item:Mastermenu) {
 
 
             VBox itemCard=new VBox(20);
